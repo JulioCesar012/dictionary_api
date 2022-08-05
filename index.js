@@ -3,20 +3,23 @@ const server = jsonServer.create()
 const router = jsonServer.router('word_list.json')
 const middlewares = jsonServer.defaults()
 
+const express = require("express");
+const app = express();
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-server.use(bodyParser.urlencoded({ extended: false }));
-server.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 server.use(middlewares)
 server.use(router)
 
-server.use(cors({
+app.use(cors({
     origin: '*'
 }));
 
-server.use((request, response, next) => {
+app.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');
   response.header(
     'Access-Control-Allow-Headers',
