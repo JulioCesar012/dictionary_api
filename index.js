@@ -30,6 +30,6 @@ server.use((request, response, next) => {
   next();
 });
 
-server.listen(4000, () => {
+server.listen(process.env.PORT || 4000, () => {
   console.log('JSON Server is running')
 })
