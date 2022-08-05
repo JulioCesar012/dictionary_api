@@ -1,19 +1,22 @@
-const express = require("express");
-const { wordList } = require("./word_list.json");
-
-const app = express();
+const jsonServer = require('json-server')
+const server = jsonServer.create()
+const router = jsonServer.router('word_list.json')
+const middlewares = jsonServer.defaults()
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: false }));
+server.use(bodyParser.json());
 
-app.use(cors({
+server.use(middlewares)
+server.use(router)
+
+server.use(cors({
     origin: '*'
 }));
 
-app.use((request, response, next) => {
+server.use((request, response, next) => {
   response.header('Access-Control-Allow-Origin', '*');
   response.header(
     'Access-Control-Allow-Headers',
@@ -27,12 +30,6 @@ app.use((request, response, next) => {
   next();
 });
 
-const port = process.env.PORT || 4000;
-
-app.get("/word_list", function(req, res) {
-    res.json(wordList)
-});
-
-app.listen(port, () =>
-  console.log(`server is listening at http://localhost:${port}`)
-);
+server.listen(4000, () => {
+  console.log('JSON Server is running')
+})
