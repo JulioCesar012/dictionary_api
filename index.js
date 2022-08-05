@@ -1,5 +1,5 @@
 const express = require("express");
-const WordList = require("./word_list.json");
+const { wordList } = require("./word_list.json");
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use((request, response, next) => {
 const port = process.env.PORT || 4000;
 
 app.get("/word_list", function(req, res) {
-    res.json(WordList)
+    res.json(wordList)
 });
 
 app.listen(port, () =>
