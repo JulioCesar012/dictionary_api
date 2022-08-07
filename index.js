@@ -1,7 +1,8 @@
+const word_list = require("./word_list.json");
 
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router("./word_list.json")
+const router = jsonServer.router(word_list)
 const middlewares = jsonServer.defaults()
 
 const express = require("express");
