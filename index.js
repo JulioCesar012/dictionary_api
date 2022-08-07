@@ -1,9 +1,7 @@
 
-const word_list = require("./word_list.json");
-
 const jsonServer = require('json-server')
 const server = jsonServer.create()
-const router = jsonServer.router(word_list)
+const router = jsonServer.router("word_list.json")
 const middlewares = jsonServer.defaults()
 
 const express = require("express");
@@ -36,6 +34,6 @@ app.use((request, response, next) => {
   next();
 });
 
-server.listen(process.env.PORT || 4000, () => {
+server.listen(process.env.PORT || 3005, () => {
   console.log('JSON Server is running')
 })
